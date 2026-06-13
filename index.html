@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Hearth">
+<title>Kin — Family Board</title>
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAGLElEQVR4nO3dvW9cRRTG4TEg2YICYQsjEKJyR0dBgRAl/M2kjCIKCrp0NEEICUtAGpBTIFEcdDVa77meOx/nvGfmfaoUTnbu7G/PHW+czcX96z8S0TlveS+AcDEOUjEOUjEOUjEOUjEOUjEOUjEOUjEOUjEOUjEOUjEOUjEOUjEOUjEOUjEOUr3jvQBPz3/6seTLvvniy9ErwXSx1E+CFdawb51W5o+jSxCauUOZOY6hWeRmTWTCOMyaeGyySqaKwzGL3DSJzPOtLEgZCWkljWaYHLBPRvQREn5ywJaRsNdWIvDkCLT1QUdI1MkRqIwUbbWbkHFE3OuIa44XR8RdFuFWHiyOcPt7Itb6I8URa2c1ga4iTByB9vRJUa4lRhxRdrNciCsKEEeIfayAf13oceDvYAvwq4OOA3zvukC+Rug4yBduHMgvqb5grxQ0Dtj9GgTzekHjIASIcWC+jEYDvGq4OAD3yAzatcPFQTiw4kB76diD2gGsOAgK4yAVUBxQE9URzj4AxUFoUOLAebkgANkNlDgIEOMgFeMgFUQcILdYKAh7AhEHYWIcpGIcpGIcpPKPA+Hkhcl9Z/zjIFiMg1SMg1SMg1SMg1SMg1Rh/r+VX359KPmyzz69Gr2SfR/89nPJl/31yd3olbTDjaOwhv3fZdBKYQ37vwuzFaw46oIo/AM7hlIXROEfiBMKShzds9AeojGR7lloD4GQiPPHWz978fL+T58FHKrEoImzbq9vPvrqO5eHTo5xPHvxUn7hFYd4MhGvLMTt9Y38wiURn29ltzJSdv0u9m9nIGWklH7/4Xv7BVhPjjyLje/wECcjxDcLcfZlYzlCTCfH2TJA5CMEoQyN5Qgxmhz7WSBMDnH38Oq9d9/2XsX/9m+4BiPEYnIgD4zc3cOrlNLf//zrvZAiBiNkeBwlZfieSYWUIRD6KNmT0X2MjSPWzMgh9FFiaB8D44hbhmAfo+KIXoZYvI8hcVSU4XLs2C9DuPRRsRsj+ugfxxwzI7fs/OgcR0sZlsOjvAxh2UfLPvTto2cc882M3ILzo1scc5chVusD6weMEd4N8wW1A33iWGFsiKWGR4c4+pYx7qXTXoYY10ffa2/vA+u2IqBGqxnAq26NY50bSm6Rm0tTHOPK6Psy6luG6NvHuLHR0gfibUUAjtlBYK+0Po41byi56W8uuJMjAb+kOkK+Rug4EvbetQO/uso4LO8pLTs47p4iWu4slmXU3VnQJ4cAf4VVCHFFNXG4HEUrdnP02BAVw8OljIrhEWNyiBCvticFuopIcaRQO3tWrPUHiyNF299cuJUfjgPhva+SXbY5cIiSYwdCGUePHfEmh0DY63KxVrtB+dinCrLjOP8I+6ygWYiok2ODvPvIaysReHJsAEdI9CzEscmBcBrV5M+H5WlU5GdS5DIOnUlnmBwb9xGCnEWF8GeOx26vb64uL68uL80eUR5usjLSZJPjhPTx8ObN6IeY1cxxiPz56xLK3EHk5o8jd/K8FrayTg0n1orjxLLPeqEJD6TUC+MgFeMgFeMgFeMgFeMg1bE4vv3680Hr6Ov+xnqdH3/4vvEj1jn0cfqcHKRiHKRiHKRiHKQ6HAfPpI9NeRpNnBy0g3GQinGQqiYOHjtysx44EicH7aiMg8NDTDw2EicH7WAcpKqPg3eWue8piZODdjTFsfLwmH5spPbJsWYfK5SReFuhHR3iWG14LDI2Uq/JsU4f65SReFuhHd3iWGF4LDU2Ut/JMXcfq5WRut9WZu1jwTLSiDPHfH2sWUYadCCdqY9ly0jjvluZo4+Vy0hDv5WN3sfiZaTR73PE7YNlJIM3wSL2wTKExTuksfpgGZuL+9d2nxSO/Ln6KYu4+v/3tmGQhTD9uxXkEZKvzWz3K1iuzXRybKBGyE6yUCPEPlmfv5XFGSH7K8EZIS4r8ZkcG8cRcihQxxHiGKhzHBuzShqHllklCEMLJQ4xNJGO97KhiSBkIbDiyHUJxeBw0yUUnCByuHGcKGzF/ahb2ApmDSfCxEH2+APGpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpGIcpPoP8CVCPbu8TEUAAAAASUVORK5CYII=">
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 36"><circle cx="20" cy="13" r="11" fill="%238AA399" fill-opacity=".7"/><circle cx="13" cy="23" r="11" fill="%237E93AB" fill-opacity=".7"/><circle cx="27" cy="23" r="11" fill="%23C6967F" fill-opacity=".7"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F2F4F3; --card:#FFFFFF; --ink:#2E3A38; --ink-soft:#5C6864; --ink-faint:#94A09B;
+  --line:#E5E9E7; --line-soft:#EEF1F0; --clay:#8AA399; --clay-soft:#E6EDEA;
+  --shadow:0 1px 2px rgba(46,58,56,.04),0 4px 16px rgba(46,58,56,.06);
+  --rail:76px; --mast:96px; --r:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter,sans-serif;
+  background:var(--paper);color:var(--ink);-webkit-user-select:none;user-select:none;
+  -webkit-text-size-adjust:100%;font-size:15px}
+.serif{font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif}
+
+/* ===== Shell ===== */
+#app{display:grid;grid-template-columns:var(--rail) 1fr;grid-template-rows:var(--mast) 1fr;
+  height:100%;height:100dvh}
+/* Rail */
+#rail{grid-row:1/3;background:var(--card);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:6px;z-index:30}
+#rail .logo{display:flex;flex-direction:column;align-items:center;gap:3px;margin-bottom:16px;line-height:1}
+#rail .logo svg{width:36px;height:32px;overflow:visible}
+#rail .logo .wm{font-size:12px;font-weight:700;letter-spacing:.04em;color:var(--ink)}
+.navbtn{width:56px;height:56px;border:none;background:none;border-radius:14px;color:var(--ink-faint);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer}
+.navbtn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.navbtn span{font-size:9.5px;font-weight:600;letter-spacing:.04em}
+.navbtn.active{background:var(--clay-soft);color:var(--clay)}
+#rail .spacer{flex:1}
+/* Masthead */
+#mast{grid-column:2;display:flex;align-items:center;gap:20px;padding:0 24px;border-bottom:1px solid var(--line)}
+#mastDate{font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;font-size:34px;letter-spacing:-.01em;line-height:1.05}
+#mastDate small{display:block;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-weight:600;
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px}
+#mastRight{margin-left:auto;display:flex;align-items:center;gap:18px}
+#clock{font-size:30px;font-weight:200;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+#wx{display:none;align-items:center;gap:7px;font-size:15px;color:var(--ink-soft);font-weight:500}
+#wx .t{font-size:22px;color:var(--ink);font-weight:400}
+#memberChips{display:flex;gap:8px;flex-wrap:wrap;max-width:46vw}
+.chip{display:flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;border:1.5px solid var(--line);
+  background:var(--card);font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer}
+.chip .dot{width:10px;height:10px;border-radius:50%}
+.chip.on{border-color:currentColor}
+/* Main */
+#main{grid-column:2;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.view{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;display:none;flex-direction:column}
+.view.show{display:flex}
+
+/* ===== Week grid ===== */
+#weekbar{display:flex;align-items:center;gap:10px;padding:12px 24px 10px}
+#weekLabel{font-weight:600;font-size:15px;color:var(--ink-soft)}
+.pill{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:9px 16px;
+  font-size:14px;font-weight:600;color:var(--ink);cursor:pointer}
+.pill.accent{background:var(--ink);border-color:var(--ink);color:#fff}
+#grid{flex:1;display:grid;grid-template-columns:52px repeat(7,1fr);grid-template-rows:auto auto 1fr;
+  margin:0 24px 20px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);overflow:hidden;min-height:0}
+.gh{padding:10px 6px 8px;text-align:center;border-left:1px solid var(--line-soft)}
+.gh:first-child{border-left:none}
+.gh .dw{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.gh .dn{font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:22px;font-weight:600;margin-top:1px}
+.gh.today .dn{color:#fff;background:var(--clay);width:36px;height:36px;line-height:36px;border-radius:50%;
+  display:inline-block;margin-top:2px}
+.adcell{border-left:1px solid var(--line-soft);border-top:1px solid var(--line-soft);padding:3px;min-height:26px}
+.adlab{font-size:9px;font-weight:700;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em;
+  display:flex;align-items:center;justify-content:center;border-top:1px solid var(--line-soft)}
+.banner{font-size:11px;font-weight:600;color:#fff;border-radius:6px;padding:3px 7px;margin:1px 0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+#gridScroll{grid-column:1/9;overflow-y:auto;position:relative;-webkit-overflow-scrolling:touch;min-height:0}
+#gridInner{display:grid;grid-template-columns:52px repeat(7,1fr);position:relative}
+.hourlab{font-size:10px;font-weight:600;color:var(--ink-faint);text-align:right;padding-right:7px;
+  transform:translateY(-6px)}
+.daycol{position:relative;border-left:1px solid var(--line-soft)}
+.hline{position:absolute;left:0;right:0;border-top:1px solid var(--line-soft)}
+.ev{position:absolute;border-radius:8px;padding:4px 7px;overflow:hidden;cursor:pointer;
+  color:#fff;box-shadow:0 1px 3px rgba(32,48,60,.18)}
+.ev .et{font-size:11.5px;font-weight:700;line-height:1.25;overflow:hidden;text-overflow:ellipsis;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.ev .em{font-size:10px;font-weight:600;opacity:.85}
+#nowline{position:absolute;left:52px;right:0;height:2px;background:var(--clay);z-index:5;pointer-events:none}
+#nowline::before{content:"";position:absolute;left:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:var(--clay)}
+
+/* ===== Today view ===== */
+.padwrap{padding:18px 24px 28px;display:flex;gap:20px;flex:1;min-height:0;overflow:auto}
+.col{flex:1;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px}
+.card h3{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px}
+.agitem{display:flex;gap:14px;align-items:flex-start;padding:11px 0;border-top:1px solid var(--line-soft)}
+.agitem:first-of-type{border-top:none}
+.agtime{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;min-width:74px;color:var(--ink-soft);padding-top:1px}
+.agbar{width:4px;border-radius:2px;align-self:stretch;min-height:30px}
+.agbody .t{font-size:15.5px;font-weight:600}
+.agbody .m{font-size:12.5px;color:var(--ink-soft);margin-top:1px}
+.empty{color:var(--ink-faint);font-size:14px;padding:14px 0;text-align:center}
+
+/* ===== Chores ===== */
+#choreCols{display:flex;gap:16px;padding:18px 24px 28px;overflow-x:auto;flex:1;align-items:flex-start}
+.chorecol{min-width:235px;flex:1;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:16px;display:flex;flex-direction:column;gap:4px}
+.chorehead{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.avatar{width:38px;height:38px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:16px}
+.chorehead .nm{font-weight:700;font-size:16px}
+.chorehead .stars{margin-left:auto;font-size:13px;font-weight:700;color:var(--clay)}
+.chore{display:flex;align-items:center;gap:11px;padding:10px 6px;border-radius:10px;cursor:pointer}
+.chore:active{background:var(--line-soft)}
+.cbox{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);flex:none;display:flex;
+  align-items:center;justify-content:center;color:#fff;font-size:15px}
+.chore.done .cbox{border-color:transparent}
+.chore.done .ct{text-decoration:line-through;color:var(--ink-faint)}
+.ct{font-size:14.5px;font-weight:600;flex:1}
+.csub{font-size:11px;color:var(--ink-faint);font-weight:600}
+.addrow{border:none;background:none;color:var(--ink-faint);font-size:13.5px;font-weight:600;
+  padding:10px 6px;text-align:left;cursor:pointer;border-radius:10px}
+.addrow:active{background:var(--line-soft)}
+
+/* ===== Lists ===== */
+#listWrap{display:flex;gap:16px;padding:18px 24px 28px;overflow-x:auto;flex:1;align-items:flex-start}
+.listcol{min-width:250px;flex:1;max-width:340px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r);box-shadow:var(--shadow);padding:16px;display:flex;flex-direction:column}
+.listcol h4{font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.listcol h4 .n{margin-left:auto;font-size:12px;color:var(--ink-faint);font-weight:600}
+.litem{display:flex;align-items:center;gap:11px;padding:9px 4px;cursor:pointer;border-radius:8px}
+.litem:active{background:var(--line-soft)}
+.litem .cbox{width:24px;height:24px;border-radius:50%}
+.litem.done .lt{text-decoration:line-through;color:var(--ink-faint)}
+.lt{font-size:14.5px;font-weight:500;flex:1}
+.linput{display:flex;gap:8px;margin-top:8px}
+.linput input{flex:1;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;
+  font-family:inherit;background:var(--paper);color:var(--ink);-webkit-user-select:text;user-select:text}
+.linput button{border:none;background:var(--ink);color:#fff;border-radius:10px;width:42px;font-size:20px;cursor:pointer}
+
+/* ===== Meals ===== */
+#mealsWrap{padding:18px 24px 28px;flex:1;overflow:auto}
+#mealGrid{display:grid;grid-template-columns:84px repeat(7,1fr);background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.mg{border-left:1px solid var(--line-soft);border-top:1px solid var(--line-soft);padding:10px}
+.mg.h{border-top:none;text-align:center}
+.mg.h .dw{font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--ink-faint);text-transform:uppercase}
+.mg.h .dn{font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:19px;font-weight:600}
+.mg.h.today .dn{color:var(--clay)}
+.mg.lab{display:flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-soft);border-left:none}
+.mg.cell{min-height:84px;cursor:pointer;font-size:13.5px;font-weight:500;line-height:1.35;color:var(--ink)}
+.mg.cell:empty::after{content:"+";color:var(--line);font-size:18px;font-weight:400}
+.mg.cell:active{background:var(--line-soft)}
+
+/* ===== Settings ===== */
+#setWrap{padding:18px 24px 40px;overflow:auto;flex:1;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-content:start}
+.setrow{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--line-soft)}
+.setrow:first-of-type{border-top:none}
+.setrow label{font-size:14.5px;font-weight:600;flex:1}
+.setrow input[type=text],.setrow input[type=number],.setrow input[type=time],.setrow select{
+  border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;font-size:14px;font-family:inherit;
+  background:var(--paper);color:var(--ink);-webkit-user-select:text;user-select:text}
+.mline{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line-soft)}
+.mline input[type=text]{flex:1;border:1.5px solid var(--line);border-radius:10px;padding:9px 12px;font-size:14px;
+  background:var(--paper);-webkit-user-select:text;user-select:text;font-family:inherit;color:var(--ink)}
+.swatch{width:34px;height:34px;border-radius:50%;border:3px solid #fff;outline:1.5px solid var(--line);cursor:pointer;flex:none}
+.del{border:none;background:none;color:var(--ink-faint);font-size:19px;cursor:pointer;padding:6px}
+.btn{border:none;border-radius:11px;padding:12px 18px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.ghost{background:var(--paper);border:1.5px solid var(--line);color:var(--ink)}
+.btn.danger{background:#fff;border:1.5px solid #E2B4A6;color:#B5482A}
+.hint{font-size:12px;color:var(--ink-faint);line-height:1.5;margin-top:8px}
+
+/* ===== AI ===== */
+.askbtn{display:flex;align-items:center;gap:8px;border:none;background:var(--ink);color:#fff;
+  border-radius:999px;padding:11px 18px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.askbtn .spark{color:#B7CFC6}
+#aiInput{width:100%;border:1.5px solid var(--line);border-radius:13px;padding:14px;font-size:16px;
+  font-family:inherit;background:var(--paper);color:var(--ink);resize:none;height:84px;
+  -webkit-user-select:text;user-select:text}
+.aihints{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.aihints button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 12px;
+  font-size:12px;font-weight:600;color:var(--ink-soft);cursor:pointer;font-family:inherit}
+.aiact{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-top:1px solid var(--line-soft)}
+.aiact:first-child{border-top:none}
+.aiact .cbox{margin-top:1px}
+.aiact.off{opacity:.38}
+.aiact .k{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;
+  border-radius:5px;padding:2.5px 7px;margin-top:2px;flex:none}
+.aiact .b .t{font-size:14.5px;font-weight:600}
+.aiact .b .m{font-size:12px;color:var(--ink-soft);margin-top:1px}
+.aianswer{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+  font-size:14.5px;line-height:1.55;margin-bottom:14px;white-space:pre-wrap;-webkit-user-select:text;user-select:text}
+.aithinking{display:flex;align-items:center;gap:12px;color:var(--ink-soft);font-size:14px;font-weight:600;padding:18px 4px}
+.dotpulse{width:9px;height:9px;border-radius:50%;background:var(--clay);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.3;transform:scale(.85)}50%{opacity:1;transform:scale(1.1)}}
+@media (prefers-reduced-motion:reduce){.dotpulse{animation:none}}
+#briefBody{font-size:14px;line-height:1.6;white-space:pre-wrap;-webkit-user-select:text;user-select:text}
+#briefBody.empty{text-align:center}
+.cardact{border:none;background:var(--paper);border:1.5px solid var(--line);border-radius:10px;
+  padding:9px 14px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;font-family:inherit;margin-top:10px}
+/* ===== Modal ===== */
+#scrim{position:fixed;inset:0;background:rgba(32,48,60,.35);backdrop-filter:blur(3px);z-index:80;display:none}
+#scrim.show{display:flex;align-items:center;justify-content:center}
+#modal{background:var(--card);border-radius:20px;width:min(560px,92vw);max-height:88dvh;overflow:auto;
+  padding:24px;box-shadow:0 24px 70px rgba(32,48,60,.3)}
+#modal h2{font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:23px;font-weight:600;margin-bottom:16px}
+.frow{margin-bottom:14px}
+.frow>label{display:block;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:7px}
+.frow input[type=text],.frow input[type=date],.frow input[type=time],.frow select,.frow textarea{
+  width:100%;border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;font-size:16px;
+  font-family:inherit;background:var(--paper);color:var(--ink);-webkit-user-select:text;user-select:text}
+.frow textarea{resize:none;height:70px}
+.fsplit{display:flex;gap:12px}
+.fsplit .frow{flex:1}
+.togglerow{display:flex;align-items:center;justify-content:space-between;padding:4px 0 14px}
+.togglerow span{font-size:15px;font-weight:600}
+.switch{width:52px;height:31px;border-radius:999px;background:var(--line);position:relative;cursor:pointer;
+  transition:background .15s;border:none;flex:none}
+.switch::after{content:"";position:absolute;top:3px;left:3px;width:25px;height:25px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .15s}
+.switch.on{background:var(--clay)}
+.switch.on::after{left:24px}
+.whoRow{display:flex;gap:8px;flex-wrap:wrap}
+.whoRow .chip{padding:10px 15px;font-size:14px}
+.mactions{display:flex;gap:10px;margin-top:20px}
+.mactions .btn{flex:1;padding:15px}
+.mactions .btn.danger{flex:0 0 auto}
+
+/* ===== Sleep ===== */
+#sleep{position:fixed;inset:0;background:#0E1418;z-index:200;display:none;flex-direction:column;
+  align-items:center;justify-content:center;color:#56636D}
+#sleep.show{display:flex}
+#sleepClock{font-size:13vw;font-weight:200;color:#8C99A4;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+#sleepDate{font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:3vw;margin-top:8px}
+/* Toast */
+#toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);
+  color:#fff;font-size:14px;font-weight:600;padding:13px 22px;border-radius:999px;z-index:300;
+  transition:transform .25s;pointer-events:none}
+#toast.show{transform:translateX(-50%) translateY(0)}
+@media (max-width:760px){
+  :root{--rail:64px;--mast:78px}
+  #mastDate{font-size:24px} #clock{font-size:22px} #memberChips{display:none}
+  #setWrap{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <nav id="rail">
+    <div class="logo">
+      <svg viewBox="0 0 40 36" aria-label="Kin">
+        <circle cx="20" cy="13" r="11" fill="#8AA399" fill-opacity=".7"/>
+        <circle cx="13" cy="23" r="11" fill="#7E93AB" fill-opacity=".7"/>
+        <circle cx="27" cy="23" r="11" fill="#C6967F" fill-opacity=".7"/>
+      </svg>
+      <span class="wm">kin</span>
+    </div>
+    <button class="navbtn active" data-v="week"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Week</span></button>
+    <button class="navbtn" data-v="today"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>Today</span></button>
+    <button class="navbtn" data-v="chores"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg><span>Chores</span></button>
+    <button class="navbtn" data-v="lists"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg><span>Lists</span></button>
+    <button class="navbtn" data-v="meals"><svg viewBox="0 0 24 24"><path d="M5 3v8M9 3v8M7 11v10M7 3v0M17 3c-2 0-3 2.5-3 5 0 2 1 3 3 3v10M17 3v8"/></svg><span>Meals</span></button>
+    <div class="spacer"></div>
+    <button class="navbtn" data-v="settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 00-2-1.2L14 3h-4l-.5 2.6a7 7 0 00-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 005 12a7 7 0 00.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 002 1.2L10 21h4l.5-2.6a7 7 0 002-1.2l2.4 1 2-3.4-2-1.6c.07-.4.1-.8.1-1.2z"/></svg><span>Set up</span></button>
+  </nav>
+
+  <header id="mast">
+    <div id="mastDate"><small id="famName">Family</small><span id="mastDateTxt"></span></div>
+    <div id="memberChips"></div>
+    <div id="mastRight">
+      <button class="askbtn" id="askBtn"><span class="spark">✦</span>Ask</button>
+      <div id="wx"><span id="wxIcon"></span><span class="t" id="wxTemp"></span></div>
+      <div id="clock"></div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- WEEK -->
+    <section class="view show" id="v-week">
+      <div id="weekbar">
+        <button class="pill" id="wPrev">‹</button>
+        <button class="pill" id="wToday">This week</button>
+        <button class="pill" id="wNext">›</button>
+        <span id="weekLabel"></span>
+        <span style="flex:1"></span>
+        <button class="pill accent" id="addEvent">+ Add event</button>
+      </div>
+      <div id="grid">
+        <div class="gh" style="border:none"></div>
+        <div class="gh" data-d="0"></div><div class="gh" data-d="1"></div><div class="gh" data-d="2"></div>
+        <div class="gh" data-d="3"></div><div class="gh" data-d="4"></div><div class="gh" data-d="5"></div><div class="gh" data-d="6"></div>
+        <div class="adlab">all day</div>
+        <div class="adcell" data-d="0"></div><div class="adcell" data-d="1"></div><div class="adcell" data-d="2"></div>
+        <div class="adcell" data-d="3"></div><div class="adcell" data-d="4"></div><div class="adcell" data-d="5"></div><div class="adcell" data-d="6"></div>
+        <div id="gridScroll"><div id="gridInner"></div></div>
+      </div>
+    </section>
+
+    <!-- TODAY -->
+    <section class="view" id="v-today">
+      <div class="padwrap">
+        <div class="col" style="flex:1.4">
+          <div class="card"><h3 id="todayAgendaTitle">Today</h3><div id="todayAgenda"></div></div>
+        </div>
+        <div class="col">
+          <div class="card"><h3>Daily brief <span style="color:var(--clay)">✦</span></h3>
+            <div id="briefBody" class="empty">Tap below for a quick rundown of the day.</div>
+            <button class="cardact" id="briefBtn">Generate brief</button></div>
+          <div class="card"><h3>Chores today</h3><div id="todayChores"></div></div>
+          <div class="card"><h3 id="todayMealTitle">Tonight's dinner</h3><div id="todayMeal" class="empty">Nothing planned</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHORES -->
+    <section class="view" id="v-chores"><div id="choreCols"></div></section>
+
+    <!-- LISTS -->
+    <section class="view" id="v-lists"><div id="listWrap"></div></section>
+
+    <!-- MEALS -->
+    <section class="view" id="v-meals">
+      <div id="weekbar">
+        <button class="pill" id="mPrev">‹</button>
+        <button class="pill" id="mToday">This week</button>
+        <button class="pill" id="mNext">›</button>
+        <span id="mealLabel"></span>
+        <span style="flex:1"></span>
+        <button class="pill accent" id="planWeek">✦ Plan this week</button>
+      </div>
+      <div id="mealsWrap"><div id="mealGrid"></div></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="view" id="v-settings">
+      <div id="setWrap">
+        <div class="card">
+          <h3>Household</h3>
+          <div class="setrow"><label>Family name</label><input type="text" id="setFam" style="width:180px"></div>
+          <h3 style="margin-top:18px">People</h3>
+          <div id="memberList"></div>
+          <button class="addrow" id="addMember">+ Add person</button>
+        </div>
+        <div class="card">
+          <h3>Display</h3>
+          <div class="setrow"><label>Day starts at</label><select id="setDayStart"></select></div>
+          <div class="setrow"><label>Day ends at</label><select id="setDayEnd"></select></div>
+          <div class="setrow"><label>Sleep mode (auto-dim)</label><button class="switch" id="setSleepOn"></button></div>
+          <div class="setrow"><label>Sleep from</label><input type="time" id="setSleepFrom"></div>
+          <div class="setrow"><label>Wake at</label><input type="time" id="setSleepTo"></div>
+          <p class="hint">Sleep mode dims the screen to a night clock between these hours. Tap anywhere to wake it.</p>
+        </div>
+        <div class="card">
+          <h3>Assistant <span style="color:var(--clay)">✦</span></h3>
+          <div class="setrow"><label>API key (standalone only)</label><input type="text" id="setKey" style="width:200px" placeholder="sk-ant-…" autocomplete="off"></div>
+          <p class="hint" id="aiModeHint"></p>
+          <div class="frow" style="margin-top:14px"><label style="display:block;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px">Household notes for the assistant</label>
+            <textarea id="setNotes" style="width:100%;border:1.5px solid var(--line);border-radius:11px;padding:12px;font-size:14px;font-family:inherit;background:var(--paper);color:var(--ink);height:74px;resize:none;-webkit-user-select:text;user-select:text" placeholder="e.g. No pork. Bins go out Tuesday night. Kids finish school 3pm."></textarea></div>
+        </div>
+        <div class="card">
+          <h3>Weather (optional)</h3>
+          <div class="setrow"><label>Latitude</label><input type="number" id="setLat" step="0.01" style="width:120px" placeholder="-27.47"></div>
+          <div class="setrow"><label>Longitude</label><input type="number" id="setLon" step="0.01" style="width:120px" placeholder="153.03"></div>
+          <p class="hint">Uses the free Open-Meteo service, no account needed. Leave blank to hide weather. Brisbane is -27.47, 153.03.</p>
+        </div>
+        <div class="card">
+          <h3>Backup</h3>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn dark" id="btnExport">Export backup</button>
+            <button class="btn ghost" id="btnImport">Import backup</button>
+            <button class="btn danger" id="btnWipe">Erase everything</button>
+          </div>
+          <input type="file" id="importFile" accept=".json" style="display:none">
+          <p class="hint">Everything lives on this iPad. Export a backup file every so often and save it to iCloud Drive or email it to yourself.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div id="scrim"><div id="modal"></div></div>
+<div id="sleep"><div id="sleepClock"></div><div id="sleepDate" class="serif"></div></div>
+<div id="toast"></div>
+<script>
+"use strict";
+/* ====== Product name — change this one line to rename the whole app ====== */
+const APP_NAME = "Kin";
+/* ============ State & persistence ============ */
+const LSKEY = "hearth.v1";
+const PALETTE = ["#8AA399","#7E93AB","#C6967F","#A38BA8","#9CA98B","#B08A8A","#6F8896","#C2A878"];
+const uid = () => Math.random().toString(36).slice(2,9) + Date.now().toString(36).slice(-4);
+
+const defaultState = () => ({
+  ver: 1,
+  family: "Our Family",
+  members: [
+    { id: uid(), name: "Bryan", color: PALETTE[0] },
+    { id: uid(), name: "Partner", color: PALETTE[2] },
+  ],
+  events: [],        // {id,title,who:[memberId]|[],date:"YYYY-MM-DD",allDay,start:"HH:MM",end:"HH:MM",repeat:"none|daily|weekdays|weekly|fortnightly|monthly",until:"YYYY-MM-DD"|null,notes,skips:[dates],doneUntil:null}
+  chores: [],        // {id,title,who:memberId,repeat:"daily|weekdays|weekly",day:0-6,createdAt}
+  choreDone: {},     // {"YYYY-MM-DD": {choreId:true}}
+  stars: {},         // {memberId: n}
+  lists: [
+    { id: uid(), name: "Groceries", items: [] },
+    { id: uid(), name: "To do", items: [] },
+  ],                 // items: {id,text,done}
+  meals: {},         // {"YYYY-MM-DD": {b:"",l:"",d:""}}
+  settings: { dayStart: 6, dayEnd: 22, sleepOn: false, sleepFrom: "21:30", sleepTo: "06:00", lat: "", lon: "", apiKey: "", notes: "" },
+  brief: null,       // {date:"YYYY-MM-DD", text}
+  filter: null,      // memberId or null = everyone
+});
+
+/* Storage adapter: Claude artifact storage when available, otherwise localStorage on-device */
+const Store = {
+  cloud: typeof window.storage !== "undefined" && !!window.storage?.get,
+  async load() {
+    if (this.cloud) {
+      try { const r = await window.storage.get("hearth"); return r ? JSON.parse(r.value) : null; }
+      catch { return null; }
+    }
+    try { const raw = localStorage.getItem(LSKEY); return raw ? JSON.parse(raw) : null; }
+    catch { return null; }
+  },
+  async persist(s) {
+    if (this.cloud) {
+      try { await window.storage.set("hearth", JSON.stringify(s)); } catch { toast("Couldn't save"); }
+      return;
+    }
+    try { localStorage.setItem(LSKEY, JSON.stringify(s)); }
+    catch { toast("Couldn't save — storage full?"); }
+  },
+};
+let S = defaultState();
+let saveT = null;
+function save() {
+  clearTimeout(saveT);
+  saveT = setTimeout(() => Store.persist(S), 200);
+}
+
+/* ============ Date helpers ============ */
+const DAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+const pad = n => String(n).padStart(2,"0");
+const iso = d => d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate());
+const fromISO = s => { const [y,m,d] = s.split("-").map(Number); return new Date(y, m-1, d); };
+const today = () => iso(new Date());
+function mondayOf(d) { const x = new Date(d); const wd = (x.getDay()+6)%7; x.setDate(x.getDate()-wd); x.setHours(0,0,0,0); return x; }
+function addDays(d,n) { const x = new Date(d); x.setDate(x.getDate()+n); return x; }
+const dayIdx = d => (d.getDay()+6)%7; // Mon=0
+const mins = hhmm => { const [h,m] = hhmm.split(":").map(Number); return h*60+m; };
+const fmtTime = hhmm => {
+  let [h,m] = hhmm.split(":").map(Number);
+  const ap = h >= 12 ? "pm" : "am"; h = h % 12 || 12;
+  return m ? `${h}:${pad(m)}${ap}` : `${h}${ap}`;
+};
+const longDate = d => d.toLocaleDateString("en-AU",{weekday:"long", day:"numeric", month:"long"});
+const shortRange = (a,b) => a.toLocaleDateString("en-AU",{day:"numeric",month:"short"}) + " – " + b.toLocaleDateString("en-AU",{day:"numeric",month:"short"});
+
+/* ============ Recurrence ============ */
+function occursOn(ev, dateStr) {
+  if (ev.skips && ev.skips.includes(dateStr)) return false;
+  const d0 = fromISO(ev.date), d1 = fromISO(dateStr);
+  if (d1 < d0) return false;
+  if (ev.until && dateStr > ev.until) return false;
+  const diff = Math.round((d1 - d0) / 86400000);
+  switch (ev.repeat || "none") {
+    case "none":        return dateStr === ev.date;
+    case "daily":       return true;
+    case "weekdays":    return dayIdx(d1) < 5;
+    case "weekly":      return diff % 7 === 0;
+    case "fortnightly": return diff % 14 === 0;
+    case "monthly":     return d1.getDate() === d0.getDate();
+    default:            return dateStr === ev.date;
+  }
+}
+function eventsOn(dateStr) {
+  return S.events
+    .filter(ev => occursOn(ev, dateStr))
+    .filter(ev => !S.filter || (ev.who||[]).length === 0 || ev.who.includes(S.filter))
+    .sort((a,b) => (a.allDay?-1:1) !== (b.allDay?-1:1) ? (a.allDay?-1:1) : mins(a.start||"00:00") - mins(b.start||"00:00"));
+}
+function choreDueOn(ch, dateStr) {
+  const d = fromISO(dateStr);
+  switch (ch.repeat) {
+    case "daily":    return true;
+    case "weekdays": return dayIdx(d) < 5;
+    case "weekly":   return dayIdx(d) === (ch.day ?? 0);
+    default:         return true;
+  }
+}
+
+/* ============ Tiny DOM helpers ============ */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const member = id => S.members.find(m => m.id === id);
+const evColor = ev => (ev.who||[]).length ? (member(ev.who[0])?.color || "#6F7E8E") : "#6F7E8E";
+const evWhoNames = ev => (ev.who||[]).map(id => member(id)?.name).filter(Boolean).join(", ") || "Everyone";
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 2200);
+}
+
+/* ============ Navigation ============ */
+let curView = "week";
+let weekAnchor = mondayOf(new Date());
+let mealAnchor = mondayOf(new Date());
+$$(".navbtn").forEach(b => b.addEventListener("click", () => showView(b.dataset.v)));
+function showView(v) {
+  curView = v;
+  $$(".navbtn").forEach(b => b.classList.toggle("active", b.dataset.v === v));
+  $$(".view").forEach(x => x.classList.remove("show"));
+  $("#v-" + v).classList.add("show");
+  render();
+}
+
+/* ============ Masthead ============ */
+function renderMast() {
+  const now = new Date();
+  $("#famName").textContent = S.family;
+  $("#mastDateTxt").textContent = longDate(now);
+  $("#clock").textContent = now.toLocaleTimeString("en-AU",{hour:"numeric",minute:"2-digit"}).replace(" ","").toLowerCase();
+  const chips = S.members.map(m =>
+    `<button class="chip ${S.filter===m.id?"on":""}" style="color:${m.color}" data-mid="${m.id}">
+       <span class="dot" style="background:${m.color}"></span>${esc(m.name)}</button>`).join("");
+  $("#memberChips").innerHTML = chips;
+  $$("#memberChips .chip").forEach(c => c.addEventListener("click", () => {
+    S.filter = S.filter === c.dataset.mid ? null : c.dataset.mid; save(); render();
+  }));
+}
+/* ============ Week view ============ */
+function renderWeek() {
+  const ds = S.settings.dayStart, de = S.settings.dayEnd;
+  const hours = de - ds, HPX = 56; // px per hour
+  const days = [...Array(7)].map((_,i) => addDays(weekAnchor, i));
+  $("#weekLabel").textContent = shortRange(days[0], days[6]);
+
+  // headers + all-day rows
+  $$("#grid .gh[data-d]").forEach((h,i) => {
+    const d = days[i];
+    h.className = "gh" + (iso(d) === today() ? " today" : "");
+    h.innerHTML = `<div class="dw">${DAYS[i]}</div><div class="dn">${d.getDate()}</div>`;
+  });
+  $$("#grid .adcell").forEach((c,i) => {
+    const dstr = iso(days[i]);
+    c.innerHTML = eventsOn(dstr).filter(e => e.allDay).map(e =>
+      `<div class="banner" style="background:${evColor(e)}" data-eid="${e.id}" data-date="${dstr}">${esc(e.title)}</div>`).join("");
+  });
+
+  // time grid
+  const inner = $("#gridInner");
+  let html = "";
+  // hour label column
+  html += `<div style="position:relative;height:${hours*HPX}px">`;
+  for (let h = ds; h <= de; h++)
+    html += `<div class="hourlab" style="position:absolute;top:${(h-ds)*HPX}px;right:0;left:0">${fmtTime(pad(h)+":00")}</div>`;
+  html += `</div>`;
+  // day columns
+  for (let i = 0; i < 7; i++) {
+    const dstr = iso(days[i]);
+    html += `<div class="daycol" data-date="${dstr}" style="height:${hours*HPX}px">`;
+    for (let h = ds; h <= de; h++) html += `<div class="hline" style="top:${(h-ds)*HPX}px"></div>`;
+    const evs = eventsOn(dstr).filter(e => !e.allDay);
+    // simple overlap lanes
+    const lanes = [];
+    evs.forEach(e => {
+      const s = mins(e.start||"09:00"), en = Math.max(mins(e.end||e.start||"10:00"), s+30);
+      let li = lanes.findIndex(l => l.every(o => s >= o.en || en <= o.s));
+      if (li < 0) { lanes.push([]); li = lanes.length-1; }
+      lanes[li].push({s, en, e});
+      e._lane = li;
+    });
+    const nl = Math.max(lanes.length, 1);
+    evs.forEach(e => {
+      const s = mins(e.start||"09:00"), en = Math.max(mins(e.end||e.start||"10:00"), s+30);
+      const top = (s/60 - ds) * HPX, hgt = Math.max((en-s)/60*HPX - 3, 24);
+      const w = 100/nl, lf = e._lane * w;
+      html += `<div class="ev" data-eid="${e.id}" data-date="${dstr}"
+        style="top:${top}px;height:${hgt}px;left:calc(${lf}% + 3px);width:calc(${w}% - 6px);background:${evColor(e)}">
+        <div class="et">${esc(e.title)}</div><div class="em">${fmtTime(e.start||"09:00")}${e.end?"–"+fmtTime(e.end):""}</div></div>`;
+    });
+    html += `</div>`;
+  }
+  inner.innerHTML = html;
+  positionNowLine();
+
+  // interactions
+  $$("#gridInner .ev, #grid .banner").forEach(el =>
+    el.addEventListener("click", e => { e.stopPropagation(); openEventModal(S.events.find(x => x.id === el.dataset.eid), el.dataset.date); }));
+  $$("#gridInner .daycol").forEach(col =>
+    col.addEventListener("click", e => {
+      const r = col.getBoundingClientRect();
+      const y = e.clientY - r.top + 0; // within col
+      const hr = Math.floor(y / HPX) + ds;
+      openEventModal(null, col.dataset.date, pad(Math.min(Math.max(hr, 0), 23)) + ":00");
+    }));
+  // auto-scroll near now on first paint of today week
+  if (!renderWeek._scrolled && days.some(d => iso(d) === today())) {
+    const n = new Date(); const y = ((n.getHours() + n.getMinutes()/60) - ds - 1.5) * HPX;
+    $("#gridScroll").scrollTop = Math.max(y, 0);
+    renderWeek._scrolled = true;
+  }
+}
+function positionNowLine() {
+  let nl = $("#nowline");
+  const ds = S.settings.dayStart, HPX = 56;
+  const days = [...Array(7)].map((_,i) => iso(addDays(weekAnchor,i)));
+  const ti = days.indexOf(today());
+  if (ti < 0) { if (nl) nl.remove(); return; }
+  if (!nl) { nl = document.createElement("div"); nl.id = "nowline"; }
+  const n = new Date();
+  const top = ((n.getHours() + n.getMinutes()/60) - ds) * HPX;
+  if (top < 0 || top > (S.settings.dayEnd - ds) * HPX) { nl.remove(); return; }
+  nl.style.top = top + "px";
+  $("#gridInner").appendChild(nl);
+}
+$("#wPrev").onclick = () => { weekAnchor = addDays(weekAnchor,-7); renderWeek(); };
+$("#wNext").onclick = () => { weekAnchor = addDays(weekAnchor, 7); renderWeek(); };
+$("#wToday").onclick = () => { weekAnchor = mondayOf(new Date()); renderWeek(); };
+$("#addEvent").onclick = () => openEventModal(null, today());
+
+/* ============ Today view ============ */
+function renderToday() {
+  const dstr = today();
+  $("#todayAgendaTitle").textContent = longDate(new Date());
+  const evs = eventsOn(dstr);
+  $("#todayAgenda").innerHTML = evs.length ? evs.map(e => `
+    <div class="agitem" data-eid="${e.id}">
+      <div class="agtime">${e.allDay ? "All day" : fmtTime(e.start||"09:00")}</div>
+      <div class="agbar" style="background:${evColor(e)}"></div>
+      <div class="agbody"><div class="t">${esc(e.title)}</div>
+        <div class="m">${esc(evWhoNames(e))}${e.notes ? " · " + esc(e.notes) : ""}</div></div>
+    </div>`).join("") : `<div class="empty">Nothing on. Enjoy it.</div>`;
+  $$("#todayAgenda .agitem").forEach(el =>
+    el.addEventListener("click", () => openEventModal(S.events.find(x => x.id === el.dataset.eid), dstr)));
+
+  // chores due today
+  const due = S.chores.filter(c => choreDueOn(c, dstr));
+  const doneMap = S.choreDone[dstr] || {};
+  $("#todayChores").innerHTML = due.length ? due.map(c => {
+    const m = member(c.who); const done = !!doneMap[c.id];
+    return `<div class="chore ${done?"done":""}" data-cid="${c.id}">
+      <div class="cbox" style="${done?`background:${m?.color||"#999"}`:""}">${done?"✓":""}</div>
+      <div><div class="ct">${esc(c.title)}</div><div class="csub">${esc(m?.name||"")}</div></div></div>`;
+  }).join("") : `<div class="empty">No chores due</div>`;
+  $$("#todayChores .chore").forEach(el => el.addEventListener("click", () => toggleChore(el.dataset.cid, dstr)));
+
+  const meal = (S.meals[dstr]||{}).d;
+  $("#todayMeal").className = meal ? "" : "empty";
+  $("#todayMeal").textContent = meal || "Nothing planned";
+  const bb = $("#briefBody"), btn = $("#briefBtn");
+  if (S.brief && S.brief.date === dstr) { bb.className = ""; bb.textContent = S.brief.text; btn.textContent = "Refresh brief"; }
+  else { bb.className = "empty"; bb.textContent = "Tap below for a quick rundown of the day."; btn.textContent = "Generate brief"; }
+}
+
+/* ============ Chores ============ */
+function toggleChore(cid, dstr) {
+  const day = S.choreDone[dstr] = S.choreDone[dstr] || {};
+  const ch = S.chores.find(c => c.id === cid);
+  if (day[cid]) { delete day[cid]; if (ch) S.stars[ch.who] = Math.max((S.stars[ch.who]||0)-1, 0); }
+  else { day[cid] = true; if (ch) S.stars[ch.who] = (S.stars[ch.who]||0)+1; }
+  save(); render();
+}
+function renderChores() {
+  const dstr = today();
+  const doneMap = S.choreDone[dstr] || {};
+  $("#choreCols").innerHTML = S.members.map(m => {
+    const mine = S.chores.filter(c => c.who === m.id);
+    const rows = mine.map(c => {
+      const due = choreDueOn(c, dstr), done = !!doneMap[c.id];
+      const sub = c.repeat === "weekly" ? "Every " + DAYS[c.day??0] : c.repeat === "weekdays" ? "Weekdays" : "Daily";
+      return `<div class="chore ${done?"done":""}" data-cid="${c.id}" style="${due?"":"opacity:.42"}">
+        <div class="cbox" style="${done?`background:${m.color}`:""}">${done?"✓":""}</div>
+        <div style="flex:1"><div class="ct">${esc(c.title)}</div><div class="csub">${sub}${due?"":" · not today"}</div></div>
+        <button class="del" data-del="${c.id}">×</button></div>`;
+    }).join("");
+    return `<div class="chorecol">
+      <div class="chorehead"><div class="avatar" style="background:${m.color}">${esc(m.name[0]||"?")}</div>
+        <div class="nm">${esc(m.name)}</div><div class="stars">★ ${S.stars[m.id]||0}</div></div>
+      ${rows || `<div class="empty">No chores yet</div>`}
+      <button class="addrow" data-add="${m.id}">+ Add chore</button></div>`;
+  }).join("");
+  $$("#choreCols .chore").forEach(el => el.addEventListener("click", e => {
+    if (e.target.dataset.del) return;
+    toggleChore(el.dataset.cid, dstr);
+  }));
+  $$("#choreCols [data-del]").forEach(b => b.addEventListener("click", e => {
+    e.stopPropagation();
+    confirmBox("Delete this chore?", () => { S.chores = S.chores.filter(c => c.id !== b.dataset.del); save(); render(); });
+  }));
+  $$("#choreCols [data-add]").forEach(b => b.addEventListener("click", () => openChoreModal(b.dataset.add)));
+}
+/* ============ Lists ============ */
+function renderLists() {
+  $("#listWrap").innerHTML = S.lists.map(L => {
+    const open = L.items.filter(i => !i.done).length;
+    const rows = L.items.map(i => `
+      <div class="litem ${i.done?"done":""}" data-lid="${L.id}" data-iid="${i.id}">
+        <div class="cbox" style="${i.done?"background:#7E9B62":""}">${i.done?"✓":""}</div>
+        <div class="lt">${esc(i.text)}</div><button class="del" data-rm>×</button></div>`).join("");
+    return `<div class="listcol" data-list="${L.id}">
+      <h4>${esc(L.name)} <span class="n">${open} open</span>
+        <button class="del" data-dellist="${L.id}" style="margin-left:2px">×</button></h4>
+      <div class="litems">${rows || `<div class="empty">Empty</div>`}</div>
+      <div class="linput"><input type="text" placeholder="Add item…" enterkeyhint="done"><button>+</button></div>
+      ${L.items.some(i=>i.done) ? `<button class="addrow" data-clear="${L.id}">Clear ticked items</button>` : ""}
+    </div>`;
+  }).join("") + `<button class="pill" id="addList" style="align-self:flex-start;white-space:nowrap">+ New list</button>`;
+
+  $$("#listWrap .litem").forEach(el => el.addEventListener("click", e => {
+    const L = S.lists.find(l => l.id === el.dataset.lid);
+    const it = L.items.find(i => i.id === el.dataset.iid);
+    if (e.target.hasAttribute("data-rm")) { L.items = L.items.filter(i => i !== it); }
+    else it.done = !it.done;
+    save(); renderLists();
+  }));
+  $$("#listWrap .linput").forEach(box => {
+    const inp = box.querySelector("input"), btn = box.querySelector("button");
+    const lid = box.closest(".listcol").dataset.list;
+    const add = () => {
+      const v = inp.value.trim(); if (!v) return;
+      S.lists.find(l => l.id === lid).items.push({id:uid(), text:v, done:false});
+      save(); renderLists();
+      const ni = document.querySelector(`.listcol[data-list="${lid}"] .linput input`);
+      if (ni) ni.focus();
+    };
+    btn.addEventListener("click", add);
+    inp.addEventListener("keydown", e => { if (e.key === "Enter") add(); });
+  });
+  $$("#listWrap [data-clear]").forEach(b => b.addEventListener("click", () => {
+    const L = S.lists.find(l => l.id === b.dataset.clear);
+    L.items = L.items.filter(i => !i.done); save(); renderLists();
+  }));
+  $$("#listWrap [data-dellist]").forEach(b => b.addEventListener("click", () =>
+    confirmBox("Delete this whole list?", () => { S.lists = S.lists.filter(l => l.id !== b.dataset.dellist); save(); renderLists(); })));
+  $("#addList").addEventListener("click", () => promptBox("New list name", "", v => {
+    if (v) { S.lists.push({id:uid(), name:v, items:[]}); save(); renderLists(); }
+  }));
+}
+
+/* ============ Meals ============ */
+const MEALROWS = [["b","Breakfast"],["l","Lunch"],["d","Dinner"]];
+function renderMeals() {
+  const days = [...Array(7)].map((_,i) => addDays(mealAnchor, i));
+  $("#mealLabel").textContent = shortRange(days[0], days[6]);
+  let html = `<div class="mg h" style="border-left:none"></div>`;
+  days.forEach((d,i) => html += `<div class="mg h ${iso(d)===today()?"today":""}"><div class="dw">${DAYS[i]}</div><div class="dn">${d.getDate()}</div></div>`);
+  MEALROWS.forEach(([k,label]) => {
+    html += `<div class="mg lab">${label}</div>`;
+    days.forEach(d => {
+      const dstr = iso(d), v = (S.meals[dstr]||{})[k] || "";
+      html += `<div class="mg cell" data-date="${dstr}" data-k="${k}">${esc(v)}</div>`;
+    });
+  });
+  $("#mealGrid").innerHTML = html;
+  $$("#mealGrid .cell").forEach(c => c.addEventListener("click", () => {
+    const cur = (S.meals[c.dataset.date]||{})[c.dataset.k] || "";
+    promptBox(MEALROWS.find(r=>r[0]===c.dataset.k)[1] + " · " + fromISO(c.dataset.date).toLocaleDateString("en-AU",{weekday:"short",day:"numeric",month:"short"}), cur, v => {
+      S.meals[c.dataset.date] = S.meals[c.dataset.date] || {};
+      S.meals[c.dataset.date][c.dataset.k] = v.trim();
+      save(); renderMeals(); if (curView==="today") renderToday();
+    });
+  }));
+}
+$("#mPrev").onclick = () => { mealAnchor = addDays(mealAnchor,-7); renderMeals(); };
+$("#mNext").onclick = () => { mealAnchor = addDays(mealAnchor, 7); renderMeals(); };
+$("#mToday").onclick = () => { mealAnchor = mondayOf(new Date()); renderMeals(); };
+
+/* ============ Settings ============ */
+function renderSettings() {
+  $("#setFam").value = S.family;
+  $("#memberList").innerHTML = S.members.map(m => `
+    <div class="mline" data-mid="${m.id}">
+      <button class="swatch" style="background:${m.color}"></button>
+      <input type="text" value="${esc(m.name)}">
+      <button class="del">×</button></div>`).join("");
+  $$("#memberList .mline").forEach(line => {
+    const m = member(line.dataset.mid);
+    line.querySelector("input").addEventListener("change", e => { m.name = e.target.value.trim() || m.name; save(); renderMast(); });
+    line.querySelector(".swatch").addEventListener("click", e => {
+      const i = PALETTE.indexOf(m.color);
+      m.color = PALETTE[(i+1) % PALETTE.length];
+      e.target.style.background = m.color; save(); renderMast();
+    });
+    line.querySelector(".del").addEventListener("click", () =>
+      confirmBox(`Remove ${m.name}? Their chores will be removed too.`, () => {
+        S.members = S.members.filter(x => x.id !== m.id);
+        S.chores = S.chores.filter(c => c.who !== m.id);
+        S.events.forEach(ev => ev.who = (ev.who||[]).filter(id => id !== m.id));
+        if (S.filter === m.id) S.filter = null;
+        save(); render(); renderSettings();
+      }));
+  });
+  const hours = [...Array(24)].map((_,h) => `<option value="${h}">${fmtTime(pad(h)+":00")}</option>`).join("");
+  $("#setDayStart").innerHTML = hours; $("#setDayEnd").innerHTML = hours;
+  $("#setDayStart").value = S.settings.dayStart; $("#setDayEnd").value = S.settings.dayEnd;
+  $("#setSleepOn").classList.toggle("on", S.settings.sleepOn);
+  $("#setSleepFrom").value = S.settings.sleepFrom; $("#setSleepTo").value = S.settings.sleepTo;
+  $("#setLat").value = S.settings.lat; $("#setLon").value = S.settings.lon;
+  $("#setKey").value = S.settings.apiKey || "";
+  $("#setNotes").value = S.settings.notes || "";
+  $("#aiModeHint").textContent = Store.cloud
+    ? "Running inside Claude — assistant usage is covered by your Claude plan. No key needed. Data is saved to your Claude account."
+    : "Running standalone — data stays on this iPad. The assistant needs an Anthropic API key (console.anthropic.com). Set a monthly spend cap there.";
+}
+$("#setFam").addEventListener("change", e => { S.family = e.target.value.trim() || "Family"; save(); renderMast(); });
+$("#setDayStart").addEventListener("change", e => { S.settings.dayStart = Math.min(+e.target.value, S.settings.dayEnd-4); save(); renderSettings(); renderWeek(); });
+$("#setDayEnd").addEventListener("change", e => { S.settings.dayEnd = Math.max(+e.target.value, S.settings.dayStart+4); save(); renderSettings(); renderWeek(); });
+$("#setSleepOn").addEventListener("click", e => { S.settings.sleepOn = !S.settings.sleepOn; e.target.classList.toggle("on", S.settings.sleepOn); save(); });
+$("#setSleepFrom").addEventListener("change", e => { S.settings.sleepFrom = e.target.value || "21:30"; save(); });
+$("#setSleepTo").addEventListener("change", e => { S.settings.sleepTo = e.target.value || "06:00"; save(); });
+$("#setLat").addEventListener("change", e => { S.settings.lat = e.target.value; save(); fetchWeather(); });
+$("#setLon").addEventListener("change", e => { S.settings.lon = e.target.value; save(); fetchWeather(); });
+$("#setKey").addEventListener("change", e => { S.settings.apiKey = e.target.value.trim(); save(); });
+$("#setNotes").addEventListener("change", e => { S.settings.notes = e.target.value.trim(); save(); });
+$("#addMember").addEventListener("click", () => {
+  S.members.push({id:uid(), name:"New person", color:PALETTE[S.members.length % PALETTE.length]});
+  save(); renderSettings(); renderMast();
+});
+$("#btnExport").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(S, null, 1)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "hearth-backup-" + today() + ".json";
+  a.click(); URL.revokeObjectURL(a.href);
+  toast("Backup exported");
+});
+$("#btnImport").addEventListener("click", () => $("#importFile").click());
+$("#importFile").addEventListener("change", e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const s = JSON.parse(r.result);
+      if (!s.members || !s.lists) throw 0;
+      S = Object.assign(defaultState(), s);
+      save(); render(); renderSettings(); renderMast();
+      toast("Backup restored");
+    } catch { toast("That file doesn't look like a Hearth backup"); }
+  };
+  r.readAsText(f); e.target.value = "";
+});
+$("#btnWipe").addEventListener("click", () =>
+  confirmBox("Erase everything on this board? This can't be undone.", () => {
+    S = defaultState(); save(); render(); renderSettings(); renderMast(); toast("Fresh start");
+  }));
+/* ============ Modals ============ */
+const scrim = $("#scrim"), modal = $("#modal");
+function openModal(html) { modal.innerHTML = html; scrim.classList.add("show"); }
+function closeModal() { scrim.classList.remove("show"); modal.innerHTML = ""; }
+scrim.addEventListener("click", e => { if (e.target === scrim) closeModal(); });
+
+function confirmBox(msg, onYes) {
+  openModal(`<h2>Are you sure?</h2><p style="font-size:15px;color:var(--ink-soft);line-height:1.5">${esc(msg)}</p>
+    <div class="mactions"><button class="btn ghost" id="mNo">Cancel</button><button class="btn dark" id="mYes">Yes, do it</button></div>`);
+  $("#mNo").onclick = closeModal;
+  $("#mYes").onclick = () => { closeModal(); onYes(); };
+}
+function promptBox(title, val, onOk) {
+  openModal(`<h2>${esc(title)}</h2>
+    <div class="frow"><input type="text" id="pVal" value="${esc(val)}" enterkeyhint="done"></div>
+    <div class="mactions"><button class="btn ghost" id="mNo">Cancel</button><button class="btn dark" id="mYes">Save</button></div>`);
+  const inp = $("#pVal"); inp.focus(); inp.select();
+  const ok = () => { closeModal(); onOk(inp.value); };
+  $("#mNo").onclick = closeModal; $("#mYes").onclick = ok;
+  inp.addEventListener("keydown", e => { if (e.key === "Enter") ok(); });
+}
+
+function openEventModal(ev, dateStr, startHint) {
+  const isNew = !ev;
+  const e0 = ev || { title:"", who:[], date:dateStr || today(), allDay:false,
+    start:startHint || "09:00", end:null, repeat:"none", notes:"" };
+  if (!e0.end) { const h = Math.min(parseInt(e0.start)+1, 23); e0.end = pad(h)+":00"; }
+  const whoSet = new Set(e0.who || []);
+  openModal(`
+    <h2>${isNew ? "New event" : "Edit event"}</h2>
+    <div class="frow"><label>What</label><input type="text" id="eTitle" value="${esc(e0.title)}" placeholder="Swimming lesson" enterkeyhint="done"></div>
+    <div class="frow"><label>Who</label><div class="whoRow" id="eWho">
+      ${S.members.map(m => `<button class="chip ${whoSet.has(m.id)?"on":""}" style="color:${m.color}" data-mid="${m.id}">
+        <span class="dot" style="background:${m.color}"></span>${esc(m.name)}</button>`).join("")}
+    </div></div>
+    <div class="togglerow"><span>All day</span><button class="switch ${e0.allDay?"on":""}" id="eAllDay"></button></div>
+    <div class="fsplit">
+      <div class="frow"><label>Date</label><input type="date" id="eDate" value="${e0.date}"></div>
+      <div class="frow" id="rowStart"><label>From</label><input type="time" id="eStart" value="${e0.start}"></div>
+      <div class="frow" id="rowEnd"><label>To</label><input type="time" id="eEnd" value="${e0.end}"></div>
+    </div>
+    <div class="frow"><label>Repeats</label><select id="eRepeat">
+      <option value="none">Doesn't repeat</option><option value="daily">Every day</option>
+      <option value="weekdays">Weekdays</option><option value="weekly">Every week</option>
+      <option value="fortnightly">Every fortnight</option><option value="monthly">Every month</option>
+    </select></div>
+    <div class="frow"><label>Notes</label><textarea id="eNotes">${esc(e0.notes||"")}</textarea></div>
+    <div class="mactions">
+      ${!isNew ? `<button class="btn danger" id="eDel">Delete</button>` : ""}
+      ${!isNew && e0.repeat !== "none" ? `<button class="btn ghost" id="eSkip">Skip this day</button>` : ""}
+      <button class="btn ghost" id="eCancel">Cancel</button>
+      <button class="btn dark" id="eSave">Save</button>
+    </div>`);
+  $("#eRepeat").value = e0.repeat || "none";
+  const syncAllDay = () => {
+    const on = $("#eAllDay").classList.contains("on");
+    $("#rowStart").style.display = on ? "none" : "";
+    $("#rowEnd").style.display = on ? "none" : "";
+  };
+  syncAllDay();
+  $("#eAllDay").onclick = e => { e.target.classList.toggle("on"); syncAllDay(); };
+  $$("#eWho .chip").forEach(c => c.onclick = () => {
+    const id = c.dataset.mid;
+    whoSet.has(id) ? whoSet.delete(id) : whoSet.add(id);
+    c.classList.toggle("on", whoSet.has(id));
+  });
+  $("#eCancel").onclick = closeModal;
+  $("#eSave").onclick = () => {
+    const title = $("#eTitle").value.trim();
+    if (!title) { toast("Give it a name first"); return; }
+    const data = {
+      title, who:[...whoSet], date: $("#eDate").value || today(),
+      allDay: $("#eAllDay").classList.contains("on"),
+      start: $("#eStart").value || "09:00", end: $("#eEnd").value || null,
+      repeat: $("#eRepeat").value, notes: $("#eNotes").value.trim(),
+    };
+    if (data.end && mins(data.end) <= mins(data.start)) data.end = null;
+    if (isNew) S.events.push(Object.assign({id:uid(), skips:[]}, data));
+    else Object.assign(ev, data);
+    save(); closeModal(); render();
+  };
+  if (!isNew) {
+    $("#eDel").onclick = () => confirmBox(
+      ev.repeat !== "none" ? "Delete this event and all its repeats?" : "Delete this event?",
+      () => { S.events = S.events.filter(x => x.id !== ev.id); save(); closeModal(); render(); });
+    const skipBtn = $("#eSkip");
+    if (skipBtn) skipBtn.onclick = () => {
+      ev.skips = ev.skips || []; ev.skips.push(dateStr);
+      save(); closeModal(); render(); toast("Skipped for " + dateStr);
+    };
+  }
+}
+
+function openChoreModal(memberId) {
+  const m = member(memberId);
+  openModal(`
+    <h2>New chore for ${esc(m?.name||"")}</h2>
+    <div class="frow"><label>What</label><input type="text" id="cTitle" placeholder="Empty dishwasher" enterkeyhint="done"></div>
+    <div class="frow"><label>How often</label><select id="cRepeat">
+      <option value="daily">Every day</option><option value="weekdays">Weekdays</option>
+      <option value="weekly">Once a week</option></select></div>
+    <div class="frow" id="cDayRow" style="display:none"><label>Which day</label><select id="cDay">
+      ${DAYS.map((d,i) => `<option value="${i}">${d}</option>`).join("")}</select></div>
+    <div class="mactions"><button class="btn ghost" id="cCancel">Cancel</button>
+      <button class="btn dark" id="cSave">Save</button></div>`);
+  $("#cRepeat").onchange = e => $("#cDayRow").style.display = e.target.value === "weekly" ? "" : "none";
+  $("#cCancel").onclick = closeModal;
+  $("#cSave").onclick = () => {
+    const t = $("#cTitle").value.trim();
+    if (!t) { toast("Give it a name first"); return; }
+    S.chores.push({id:uid(), title:t, who:memberId, repeat:$("#cRepeat").value, day:+$("#cDay").value});
+    save(); closeModal(); render();
+  };
+  $("#cTitle").focus();
+}
+
+/* ============ Weather (optional, Open-Meteo) ============ */
+const WXMAP = {0:"☀️",1:"🌤",2:"⛅️",3:"☁️",45:"🌫",48:"🌫",51:"🌦",53:"🌦",55:"🌧",61:"🌧",63:"🌧",65:"🌧",66:"🌧",67:"🌧",71:"🌨",73:"🌨",75:"🌨",80:"🌦",81:"🌧",82:"⛈",95:"⛈",96:"⛈",99:"⛈"};
+async function fetchWeather() {
+  const {lat, lon} = S.settings;
+  const el = $("#wx");
+  if (!lat || !lon) { el.style.display = "none"; return; }
+  try {
+    const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`);
+    const j = await r.json();
+    $("#wxTemp").textContent = Math.round(j.current.temperature_2m) + "°";
+    $("#wxIcon").textContent = WXMAP[j.current.weather_code] || "🌡";
+    el.style.display = "flex";
+  } catch { el.style.display = "none"; }
+}
+
+/* ============ Sleep mode ============ */
+function inSleepWindow() {
+  if (!S.settings.sleepOn) return false;
+  const n = new Date(); const cur = n.getHours()*60 + n.getMinutes();
+  const a = mins(S.settings.sleepFrom), b = mins(S.settings.sleepTo);
+  return a < b ? (cur >= a && cur < b) : (cur >= a || cur < b);
+}
+let sleepSnooze = 0; // timestamp until which sleep is suppressed after a wake tap
+function tickSleep() {
+  const sl = $("#sleep");
+  const should = inSleepWindow() && Date.now() > sleepSnooze;
+  if (should && !sl.classList.contains("show")) sl.classList.add("show");
+  if (!should) sl.classList.remove("show");
+  if (sl.classList.contains("show")) {
+    const n = new Date();
+    $("#sleepClock").textContent = n.toLocaleTimeString("en-AU",{hour:"numeric",minute:"2-digit"}).replace(/\s?[ap]m/i,"");
+    $("#sleepDate").textContent = longDate(n);
+  }
+}
+$("#sleep").addEventListener("click", () => { sleepSnooze = Date.now() + 10*60*1000; tickSleep(); });
+
+/* ============ Assistant ============ */
+let aiMode = Store.cloud ? "keyless" : null; // "keyless" | "key" | null (unknown)
+async function aiCall(system, userMsg) {
+  const body = JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 1200,
+    system, messages: [{ role: "user", content: userMsg }] });
+  const post = headers => fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers, body });
+  let r = null;
+  if (aiMode !== "key") {
+    try { r = await post({ "Content-Type": "application/json" }); if (r.ok) aiMode = "keyless"; } catch { r = null; }
+  }
+  if (!r || !r.ok) {
+    const k = S.settings.apiKey;
+    if (!k) throw new Error("needs-key");
+    r = await post({ "Content-Type": "application/json", "x-api-key": k,
+      "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" });
+    if (!r.ok) throw new Error("ai-failed");
+    aiMode = "key";
+  }
+  const j = await r.json();
+  return (j.content || []).filter(c => c.type === "text").map(c => c.text).join("\n");
+}
+function aiContext() {
+  const wk = mondayOf(new Date());
+  const days14 = [...Array(14)].map((_,i) => iso(addDays(new Date(), i)));
+  const agenda = {};
+  days14.forEach(d => { const e = eventsOn(d); if (e.length) agenda[d] = e.map(x =>
+    `${x.allDay ? "all-day" : fmtTime(x.start)} ${x.title} (${evWhoNames(x)})`); });
+  const mealsWk = {};
+  [...Array(7)].map((_,i) => iso(addDays(wk,i))).forEach(d => { if (S.meals[d]) mealsWk[d] = S.meals[d]; });
+  return JSON.stringify({
+    today: today() + " (" + new Date().toLocaleDateString("en-AU",{weekday:"long"}) + ")",
+    people: S.members.map(m => m.name),
+    lists: S.lists.map(L => ({ name: L.name, open: L.items.filter(i => !i.done).map(i => i.text) })),
+    chores: S.chores.map(c => ({ what: c.title, who: member(c.who)?.name,
+      when: c.repeat === "weekly" ? "every " + DAYS[c.day ?? 0] : c.repeat })),
+    next14days: agenda, mealsThisWeek: mealsWk,
+    householdNotes: S.settings.notes || "",
+  });
+}
+const AI_SYSTEM = `You are the assistant inside "Hearth", a family wall calendar app. Parse the user's request into actions, answer questions from the provided data, or both.
+Respond with ONLY a JSON object, no markdown fences, no prose outside it:
+{"answer": string|null, "actions": [
+ {"type":"event","title":string,"who":[names]|[],"date":"YYYY-MM-DD","allDay":bool,"start":"HH:MM","end":"HH:MM","repeat":"none|daily|weekdays|weekly|fortnightly|monthly"},
+ {"type":"chore","title":string,"who":name,"repeat":"daily|weekdays|weekly","day":0-6},
+ {"type":"list_item","list":name,"text":string},
+ {"type":"meal","date":"YYYY-MM-DD","slot":"b|l|d","text":string}
+]}
+Rules: dates resolved against today's date in the data. day: 0=Mon..6=Sun. Use 24h times. Multiple grocery items = one list_item action each. Only use people and list names that exist; if unsure who, use []. "answer" is for questions or a one-line note; keep it short and plain. If the request is a pure command, answer can be null. If planning meals, fill the requested days with realistic home dinners respecting householdNotes, and add needed groceries as list_item actions when asked.`;
+function parseAI(txt) {
+  const m = txt.replace(/```json|```/g, "").trim();
+  const a = m.indexOf("{"), b = m.lastIndexOf("}");
+  if (a < 0 || b < 0) throw new Error("no-json");
+  return JSON.parse(m.slice(a, b + 1));
+}
+const nameToId = n => S.members.find(m => m.name.toLowerCase() === String(n||"").toLowerCase())?.id || null;
+function describeAction(a) {
+  if (a.type === "event") {
+    const when = a.allDay ? "all day" : `${fmtTime(a.start||"09:00")}${a.end ? "–"+fmtTime(a.end) : ""}`;
+    const rep = a.repeat && a.repeat !== "none" ? " · repeats " + a.repeat : "";
+    return { k: "Event", c: "#7E93AB", t: a.title, m: `${a.date} · ${when} · ${(a.who||[]).join(", ") || "Everyone"}${rep}` };
+  }
+  if (a.type === "chore") return { k: "Chore", c: "#8AA399", t: a.title,
+    m: `${a.who || "?"} · ${a.repeat === "weekly" ? "every " + DAYS[a.day ?? 0] : a.repeat}` };
+  if (a.type === "list_item") return { k: "List", c: "#C2A878", t: a.text, m: "→ " + a.list };
+  if (a.type === "meal") return { k: "Meal", c: "#A38BA8", t: a.text,
+    m: `${a.date} · ${({b:"breakfast",l:"lunch",d:"dinner"})[a.slot] || "dinner"}` };
+  return { k: "?", c: "#94A09B", t: JSON.stringify(a), m: "" };
+}
+function applyAction(a) {
+  if (a.type === "event") {
+    S.events.push({ id: uid(), title: a.title, who: (a.who||[]).map(nameToId).filter(Boolean),
+      date: a.date || today(), allDay: !!a.allDay, start: a.start || "09:00",
+      end: a.end || null, repeat: a.repeat || "none", notes: "", skips: [] });
+  } else if (a.type === "chore") {
+    const who = nameToId(a.who) || S.members[0]?.id;
+    if (who) S.chores.push({ id: uid(), title: a.title, who, repeat: a.repeat || "daily", day: a.day ?? 0 });
+  } else if (a.type === "list_item") {
+    let L = S.lists.find(l => l.name.toLowerCase() === String(a.list||"").toLowerCase());
+    if (!L) { L = S.lists[0] || (S.lists.push({id:uid(),name:"Groceries",items:[]}), S.lists[0]); }
+    L.items.push({ id: uid(), text: a.text, done: false });
+  } else if (a.type === "meal") {
+    const d = a.date || today();
+    S.meals[d] = S.meals[d] || {};
+    S.meals[d][["b","l","d"].includes(a.slot) ? a.slot : "d"] = a.text;
+  }
+}
+function openAskModal(prefill) {
+  openModal(`
+    <h2>Ask Hearth <span style="color:var(--clay)">✦</span></h2>
+    <textarea id="aiInput" placeholder="Swimming for the kids every Tuesday 4pm…  Add milk, bread and basil…  When are we both free this weekend?" enterkeyhint="send">${esc(prefill||"")}</textarea>
+    <div class="aihints">
+      <button data-h="Plan dinners for this week, nothing fancy, and add the ingredients to groceries">Plan dinners</button>
+      <button data-h="What does the weekend look like?">Weekend?</button>
+      <button data-h="Add a weekly chore for ">Weekly chore…</button>
+    </div>
+    <div id="aiOut"></div>
+    <div class="mactions"><button class="btn ghost" id="aiCancel">Close</button>
+      <button class="btn dark" id="aiGo">Ask</button></div>`);
+  const inp = $("#aiInput");
+  $$(".aihints button").forEach(b => b.onclick = () => { inp.value = b.dataset.h; inp.focus(); });
+  $("#aiCancel").onclick = closeModal;
+  inp.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); go(); } });
+  $("#aiGo").onclick = go;
+  if (!prefill) inp.focus(); else go();
+  async function go() {
+    const q = inp.value.trim(); if (!q) return;
+    const out = $("#aiOut");
+    out.innerHTML = `<div class="aithinking"><div class="dotpulse"></div>Thinking…</div>`;
+    $("#aiGo").disabled = true;
+    try {
+      const res = parseAI(await aiCall(AI_SYSTEM, "Household data:\n" + aiContext() + "\n\nRequest: " + q));
+      const acts = Array.isArray(res.actions) ? res.actions : [];
+      let html = res.answer ? `<div class="aianswer">${esc(res.answer)}</div>` : "";
+      if (acts.length) {
+        html += acts.map((a,i) => { const d = describeAction(a); return `
+          <div class="aiact" data-i="${i}"><div class="cbox" style="background:${d.c};border-color:transparent;color:#fff">✓</div>
+          <span class="k" style="background:${d.c}">${d.k}</span>
+          <div class="b"><div class="t">${esc(d.t)}</div><div class="m">${esc(d.m)}</div></div></div>`; }).join("");
+        html += `<div class="mactions" style="margin-top:14px"><button class="btn dark" id="aiApply" style="flex:1">Add ${acts.length === 1 ? "it" : "all " + acts.length}</button></div>`;
+      } else if (!res.answer) {
+        html = `<div class="aianswer">Couldn't make sense of that one — try rewording it.</div>`;
+      }
+      out.innerHTML = html;
+      const on = acts.map(() => true);
+      $$("#aiOut .aiact").forEach(el => el.onclick = () => {
+        const i = +el.dataset.i; on[i] = !on[i];
+        el.classList.toggle("off", !on[i]);
+        el.querySelector(".cbox").textContent = on[i] ? "✓" : "";
+      });
+      const ap = $("#aiApply");
+      if (ap) ap.onclick = () => {
+        const todo = acts.filter((_,i) => on[i]);
+        todo.forEach(applyAction);
+        save(); closeModal(); render();
+        toast(todo.length ? `Added ${todo.length} thing${todo.length>1?"s":""}` : "Nothing selected");
+      };
+    } catch (e) {
+      out.innerHTML = `<div class="aianswer">${e.message === "needs-key"
+        ? "The assistant isn't connected. Running standalone, it needs an API key — add one under Set up → Assistant. Inside the Claude app it works with no key."
+        : "Couldn't reach the assistant — check the connection and try again."}</div>`;
+    }
+    $("#aiGo").disabled = false;
+  }
+}
+$("#askBtn").addEventListener("click", () => openAskModal());
+$("#planWeek").addEventListener("click", () => {
+  const days = shortRange(mealAnchor, addDays(mealAnchor, 6));
+  openAskModal(`Plan dinners for the week ${days}. Keep them simple weeknight meals, respect the household notes, and add the ingredients we'd need to the Groceries list.`);
+});
+$("#briefBtn").addEventListener("click", async () => {
+  const body = $("#briefBody"), btn = $("#briefBtn");
+  btn.disabled = true; body.className = ""; body.innerHTML = `<div class="aithinking"><div class="dotpulse"></div>Putting it together…</div>`;
+  try {
+    const txt = await aiCall(
+      "You write a tight morning brief for a family wall calendar. 3-5 short lines, plain text, no markdown, no greeting fluff. Cover today's events in order, chores due, dinner plan, and anything tomorrow worth a heads-up. Warm but economical.",
+      "Household data:\n" + aiContext());
+    S.brief = { date: today(), text: txt.trim() };
+    save(); body.textContent = S.brief.text;
+    btn.textContent = "Refresh brief";
+  } catch (e) {
+    body.className = "empty";
+    body.textContent = e.message === "needs-key"
+      ? "Assistant not connected — add an API key in Set up, or run inside the Claude app."
+      : "Couldn't reach the assistant just now.";
+  }
+  btn.disabled = false;
+});
+
+/* ============ Render root & timers ============ */
+function render() {
+  renderMast();
+  if (curView === "week") renderWeek();
+  if (curView === "today") renderToday();
+  if (curView === "chores") renderChores();
+  if (curView === "lists") renderLists();
+  if (curView === "meals") renderMeals();
+  if (curView === "settings") renderSettings();
+}
+let lastDay = today();
+setInterval(() => {
+  renderMastClock();
+  positionNowLine();
+  tickSleep();
+  if (today() !== lastDay) { lastDay = today(); weekAnchor = mondayOf(new Date()); mealAnchor = mondayOf(new Date()); render(); fetchWeather(); }
+}, 30 * 1000);
+function renderMastClock() {
+  const n = new Date();
+  $("#clock").textContent = n.toLocaleTimeString("en-AU",{hour:"numeric",minute:"2-digit"}).replace(" ","").toLowerCase();
+  $("#mastDateTxt").textContent = longDate(n);
+}
+setInterval(renderMastClock, 10 * 1000);
+setInterval(fetchWeather, 30 * 60 * 1000);
+
+/* keep screen awake where supported (iPad: turn off Auto-Lock in iPad Settings instead) */
+try { if (navigator.wakeLock) navigator.wakeLock.request("screen").catch(()=>{}); } catch {}
+/* ask iOS/WebKit to keep our data persistent (guards against storage eviction) */
+try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(()=>{}); } catch {}
+
+(async () => {
+  document.title = APP_NAME + " — Family Board";
+  const saved = await Store.load();
+  if (saved) S = Object.assign(defaultState(), saved);
+  render(); fetchWeather(); tickSleep();
+})();
+</script>
+</body>
+</html>
