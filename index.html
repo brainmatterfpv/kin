@@ -66,6 +66,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter
 .pill{border:1.5px solid var(--line);background:var(--card);border-radius:999px;padding:9px 16px;
   font-size:14px;font-weight:600;color:var(--ink);cursor:pointer}
 .pill.accent{background:var(--ink);border-color:var(--ink);color:#fff}
+.seg{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+.seg button{border:none;background:none;padding:9px 16px;font-size:13.5px;font-weight:700;color:var(--ink-soft);cursor:pointer;font-family:inherit}
+.seg button.on{background:var(--clay-soft);color:var(--clay)}
+#monthGrid{flex:1;display:flex;flex-direction:column;margin:0 24px 20px;background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;min-height:0}
+.mhead{display:grid;grid-template-columns:repeat(7,1fr)}
+.mhead>div{padding:10px 0;text-align:center;font-size:11px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-faint);border-left:1px solid var(--line-soft)}
+.mhead>div:first-child{border-left:none}
+.mbody{flex:1;display:grid;grid-template-columns:repeat(7,1fr);grid-auto-rows:1fr;min-height:0}
+.mcell{border-left:1px solid var(--line-soft);border-top:1px solid var(--line-soft);padding:6px 7px;
+  overflow:hidden;cursor:pointer;display:flex;flex-direction:column;gap:3px;min-height:0}
+.mcell:nth-child(7n+1){border-left:none}
+.mcell.out{background:#FBFCFB}
+.mcell .mn{font-size:13px;font-weight:600;color:var(--ink);align-self:flex-start;min-width:22px;text-align:center}
+.mcell.out .mn{color:var(--ink-faint)}
+.mcell.today .mn{background:var(--clay);color:#fff;height:22px;line-height:22px;border-radius:50%}
+.mev{font-size:10.5px;font-weight:600;color:#fff;border-radius:5px;padding:2px 6px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;flex:none}
+.mmore{font-size:10px;font-weight:600;color:var(--ink-faint);padding-left:2px}
+.rdot{width:7px;height:7px;border-radius:50%;background:var(--clay);display:inline-block;margin-left:2px}
 #grid{flex:1;display:grid;grid-template-columns:52px repeat(7,1fr);grid-template-rows:auto auto 1fr;
   margin:0 24px 20px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);
   box-shadow:var(--shadow);overflow:hidden;min-height:0}
@@ -327,6 +348,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter
         <button class="pill" id="wNext">›</button>
         <span id="weekLabel"></span>
         <span style="flex:1"></span>
+        <div class="seg"><button id="segWeek" class="on">Week</button><button id="segMonth">Month</button></div>
         <button class="pill accent" id="addEvent">+ Add event</button>
       </div>
       <div id="grid">
@@ -337,6 +359,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter
         <div class="adcell" data-d="0"></div><div class="adcell" data-d="1"></div><div class="adcell" data-d="2"></div>
         <div class="adcell" data-d="3"></div><div class="adcell" data-d="4"></div><div class="adcell" data-d="5"></div><div class="adcell" data-d="6"></div>
         <div id="gridScroll"><div id="gridInner"></div></div>
+      </div>
+      <div id="monthGrid" style="display:none">
+        <div class="mhead"><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div></div>
+        <div class="mbody" id="mbody"></div>
       </div>
     </section>
 
@@ -397,6 +423,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Inter
             </button>
           </div>
           <div style="margin-top:10px"><button class="btn dark" id="recipeGo">✦ Generate recipe</button></div>
+          <p class="hint" id="recipeHint" style="display:none;margin-top:10px"></p>
           <div id="recipeOut"></div>
         </div>
       </div>
@@ -578,11 +605,25 @@ function toast(msg) {
 
 /* ============ Navigation ============ */
 let curView = "week";
+let calMode = "week";                          // "week" | "month"
 let weekAnchor = mondayOf(new Date());
+let monthAnchor = firstOfMonth(new Date());
 let mealAnchor = mondayOf(new Date());
+function firstOfMonth(d){ return new Date(d.getFullYear(), d.getMonth(), 1); }
+function addMonths(d,n){ return new Date(d.getFullYear(), d.getMonth()+n, 1); }
+function weekOffsetLabel(anchor){
+  const off = Math.round((mondayOf(anchor) - mondayOf(new Date()))/(7*864e5));
+  return off===0?"This week":off===1?"Next week":off===-1?"Last week":off>0?`In ${off} weeks`:`${-off} weeks ago`;
+}
+function monthOffsetLabel(anchor){
+  const now = new Date();
+  const off = (anchor.getFullYear()-now.getFullYear())*12 + (anchor.getMonth()-now.getMonth());
+  return off===0?"This month":off===1?"Next month":off===-1?"Last month":off>0?`In ${off} months`:`${-off} months ago`;
+}
 $$(".navbtn").forEach(b => b.addEventListener("click", () => showView(b.dataset.v)));
 function showView(v) {
   curView = v;
+  attachTargetId = null;
   $$(".navbtn").forEach(b => b.classList.toggle("active", b.dataset.v === v));
   $$(".view").forEach(x => x.classList.remove("show"));
   $("#v-" + v).classList.add("show");
@@ -609,6 +650,7 @@ function renderWeek() {
   const hours = de - ds, HPX = 56; // px per hour
   const days = [...Array(7)].map((_,i) => addDays(weekAnchor, i));
   $("#weekLabel").textContent = shortRange(days[0], days[6]);
+  $("#wToday").textContent = weekOffsetLabel(weekAnchor);
 
   // headers + all-day rows
   $$("#grid .gh[data-d]").forEach((h,i) => {
@@ -689,9 +731,42 @@ function positionNowLine() {
   nl.style.top = top + "px";
   $("#gridInner").appendChild(nl);
 }
-$("#wPrev").onclick = () => { weekAnchor = addDays(weekAnchor,-7); renderWeek(); };
-$("#wNext").onclick = () => { weekAnchor = addDays(weekAnchor, 7); renderWeek(); };
-$("#wToday").onclick = () => { weekAnchor = mondayOf(new Date()); renderWeek(); };
+$("#wPrev").onclick = () => { if (calMode==="week") weekAnchor = addDays(weekAnchor,-7); else monthAnchor = addMonths(monthAnchor,-1); renderCalendar(); };
+$("#wNext").onclick = () => { if (calMode==="week") weekAnchor = addDays(weekAnchor, 7); else monthAnchor = addMonths(monthAnchor, 1); renderCalendar(); };
+$("#wToday").onclick = () => { weekAnchor = mondayOf(new Date()); monthAnchor = firstOfMonth(new Date()); renderCalendar(); };
+$("#segWeek").onclick = () => { calMode = "week"; renderCalendar(); };
+$("#segMonth").onclick = () => { calMode = "month"; renderCalendar(); };
+
+function renderCalendar() {
+  const wk = calMode === "week";
+  $("#grid").style.display = wk ? "" : "none";
+  $("#monthGrid").style.display = wk ? "none" : "flex";
+  $("#segWeek").classList.toggle("on", wk);
+  $("#segMonth").classList.toggle("on", !wk);
+  if (wk) renderWeek(); else renderMonth();
+}
+function renderMonth() {
+  const first = monthAnchor, mo = first.getMonth();
+  $("#weekLabel").textContent = first.toLocaleDateString("en-AU",{month:"long",year:"numeric"});
+  $("#wToday").textContent = monthOffsetLabel(monthAnchor);
+  const start = mondayOf(first);
+  let html = "";
+  for (let i = 0; i < 42; i++) {
+    const d = addDays(start, i), dstr = iso(d);
+    const out = d.getMonth() !== mo;
+    const evs = eventsOn(dstr);
+    const shown = evs.slice(0, 3).map(e =>
+      `<div class="mev" style="background:${evColor(e)}" data-eid="${e.id}" data-date="${dstr}">${e.allDay?"":fmtTime(e.start||"09:00")+" "}${esc(e.title)}</div>`).join("");
+    const more = evs.length > 3 ? `<div class="mmore">+${evs.length-3} more</div>` : "";
+    html += `<div class="mcell ${out?"out":""} ${dstr===today()?"today":""}" data-date="${dstr}">
+      <div class="mn">${d.getDate()}</div>${shown}${more}</div>`;
+  }
+  $("#mbody").innerHTML = html;
+  $$("#mbody .mcell").forEach(c => c.addEventListener("click", e => {
+    if (e.target.dataset.eid) { e.stopPropagation(); openEventModal(S.events.find(x => x.id === e.target.dataset.eid), e.target.dataset.date); return; }
+    calMode = "week"; weekAnchor = mondayOf(fromISO(c.dataset.date)); renderCalendar();
+  }));
+}
 $("#addEvent").onclick = () => openEventModal(null, today());
 
 /* ============ Today view ============ */
@@ -836,6 +911,7 @@ const MEALROWS = [["b","Breakfast"],["l","Lunch"],["d","Dinner"]];
 function renderMeals() {
   const days = [...Array(7)].map((_,i) => addDays(mealAnchor, i));
   $("#mealLabel").textContent = shortRange(days[0], days[6]);
+  $("#mToday").textContent = weekOffsetLabel(mealAnchor);
   let html = `<div class="mg h" style="border-left:none"></div>`;
   days.forEach((d,i) => html += `<div class="mg h ${iso(d)===today()?"today":""}"><div class="dw">${DAYS[i]}</div><div class="dn">${d.getDate()}</div></div>`);
   MEALROWS.forEach(([k,label]) => {
@@ -1304,7 +1380,8 @@ $("#briefBtn").addEventListener("click", async () => {
 const RECIPE_SYSTEM = `You are a home cook helping a family. Return ONLY a JSON object, no markdown, no prose outside it:
 {"title": string, "servings": number, "ingredients": [string], "steps": [string]}
 Keep it to everyday home cooking with common ingredients. Ingredients as plain shopping-friendly lines like "500g beef mince" or "2 carrots, diced". Steps concise and in order. Respect any household notes (allergies, dislikes, dietary needs). If the request is vague, make a sensible simple choice.`;
-let lastRecipe = null;
+let lastRecipe = null;        // most recent generated recipe (ephemeral, for the generator card)
+let attachTargetId = null;    // when set, "save" attaches the recipe to this existing staple
 
 function chooseDay(onPick) {
   const days = [...Array(7)].map((_,i) => addDays(mealAnchor, i));
@@ -1320,50 +1397,94 @@ function setDinner(dateStr, name) {
   toast(name + " → " + fromISO(dateStr).toLocaleDateString("en-AU",{weekday:"short"}) + " dinner");
   if (curView === "meals") renderMeals(); if (curView === "today") renderToday();
 }
-function useStaple(name) {
-  openModal(`<h2>${esc(name)}</h2>
-    <div class="mactions" style="flex-wrap:wrap">
-      <button class="btn dark" id="sTon">Tonight's dinner</button>
-      <button class="btn ghost" id="sDay">Pick a night</button>
-      <button class="btn danger" id="sDel">Remove staple</button>
-      <button class="btn ghost" id="sCancel">Cancel</button>
-    </div>`);
-  $("#sCancel").onclick = closeModal;
-  $("#sTon").onclick = () => { closeModal(); setDinner(today(), name); };
-  $("#sDay").onclick = () => { closeModal(); chooseDay(d => setDinner(d, name)); };
-  $("#sDel").onclick = () => { S.staples = S.staples.filter(s => s.name !== name); save(); closeModal(); renderRecipes(); };
+function addRecipeToGroceries(r) {
+  let L = S.lists.find(l => l.name.toLowerCase() === "groceries") || S.lists[0];
+  if (!L) { L = { id: uid(), name: "Groceries", items: [] }; S.lists.push(L); }
+  (r.ingredients||[]).forEach(i => L.items.push({ id: uid(), text: i, done: false }));
+  save(); toast((r.ingredients||[]).length + " items → Groceries");
 }
-function renderRecipes() {
-  $("#stapleWrap").innerHTML = (S.staples||[]).length
-    ? S.staples.map(s => `<button class="staple" data-staple="${esc(s.name)}">${esc(s.name)}</button>`).join("")
-    : `<div class="empty" style="text-align:left">No staples yet — add your regulars below.</div>`;
-  $$("#stapleWrap .staple").forEach(b => b.onclick = () => useStaple(b.dataset.staple));
-  if (lastRecipe) renderRecipeCard(lastRecipe);
-}
-function renderRecipeCard(r) {
-  const out = $("#recipeOut");
-  out.innerHTML = `<div class="recipe">
-    <h4>${esc(r.title)}</h4>
+function recipeInnerHTML(r) {
+  return `<h4>${esc(r.title)}</h4>
     <div class="serv">Serves ${esc(String(r.servings||"—"))}</div>
     <div class="rsec">Ingredients</div>
     <ul>${(r.ingredients||[]).map(i => `<li>${esc(i)}</li>`).join("")}</ul>
     <div class="rsec">Method</div>
-    <ol>${(r.steps||[]).map(s => `<li>${esc(s)}</li>`).join("")}</ol>
+    <ol>${(r.steps||[]).map(s => `<li>${esc(s)}</li>`).join("")}</ol>`;
+}
+function useStaple(id) {
+  const s = S.staples.find(x => x.id === id); if (!s) return;
+  openModal(`<h2>${esc(s.name)}</h2>
+    <div class="mactions" style="flex-wrap:wrap">
+      <button class="btn dark" id="sTon">Tonight's dinner</button>
+      <button class="btn ghost" id="sDay">Pick a night</button>
+      ${s.recipe ? `<button class="btn ghost" id="sView">View recipe</button>`
+                 : `<button class="btn ghost" id="sAdd">Add a recipe</button>`}
+      <button class="btn danger" id="sDel">Remove</button>
+      <button class="btn ghost" id="sCancel">Cancel</button>
+    </div>`);
+  $("#sCancel").onclick = closeModal;
+  $("#sTon").onclick = () => { closeModal(); setDinner(today(), s.name); };
+  $("#sDay").onclick = () => { closeModal(); chooseDay(d => setDinner(d, s.name)); };
+  $("#sDel").onclick = () => { S.staples = S.staples.filter(x => x.id !== s.id); save(); closeModal(); renderRecipes(); };
+  if (s.recipe) $("#sView").onclick = () => showRecipeModal(s);
+  else $("#sAdd").onclick = () => {
+    closeModal(); attachTargetId = s.id;
+    const inp = $("#recipeInput"); inp.value = s.name; renderRecipeHint(); inp.focus();
+    toast("Generate a recipe — it'll save to " + s.name);
+  };
+}
+function showRecipeModal(s) {
+  const r = s.recipe;
+  openModal(`<h2 style="font-size:21px">${esc(s.name)}</h2>
+    <div class="recipe" style="border:none;margin:0;padding:0">${recipeInnerHTML(r)}</div>
+    <div class="mactions" style="flex-wrap:wrap;margin-top:18px">
+      <button class="btn dark" id="vGroc">Add ingredients to Groceries</button>
+      <button class="btn ghost" id="vPlan">Plan for a night</button>
+      <button class="btn danger" id="vDel">Remove recipe</button>
+      <button class="btn ghost" id="vClose">Close</button>
+    </div>`);
+  $("#vClose").onclick = closeModal;
+  $("#vGroc").onclick = () => addRecipeToGroceries(r);
+  $("#vPlan").onclick = () => { closeModal(); chooseDay(d => setDinner(d, s.name)); };
+  $("#vDel").onclick = () => { s.recipe = null; save(); closeModal(); renderRecipes(); toast("Recipe removed from " + s.name); };
+}
+function renderRecipes() {
+  $("#stapleWrap").innerHTML = (S.staples||[]).length
+    ? S.staples.map(s => `<button class="staple" data-id="${s.id}">${esc(s.name)}${s.recipe?'<span class="rdot"></span>':''}</button>`).join("")
+    : `<div class="empty" style="text-align:left">No staples yet — add your regulars below.</div>`;
+  $$("#stapleWrap .staple").forEach(b => b.onclick = () => useStaple(b.dataset.id));
+  renderRecipeHint();
+  if (lastRecipe) renderRecipeCard(lastRecipe);
+}
+function renderRecipeHint() {
+  const el = $("#recipeHint"); if (!el) return;
+  if (attachTargetId) {
+    const s = S.staples.find(x => x.id === attachTargetId);
+    el.textContent = s ? `Will save to your staple "${s.name}".` : "";
+    el.style.display = s ? "" : "none";
+  } else { el.style.display = "none"; }
+}
+function renderRecipeCard(r) {
+  const target = attachTargetId ? S.staples.find(x => x.id === attachTargetId) : null;
+  $("#recipeOut").innerHTML = `<div class="recipe">${recipeInnerHTML(r)}
     <div class="racts">
       <button class="btn dark" id="rGroc">Add ingredients to Groceries</button>
-      <button class="btn ghost" id="rStaple">Save as staple</button>
+      <button class="btn ghost" id="rStaple">${target ? "Save to "+esc(target.name) : "Save as staple"}</button>
       <button class="btn ghost" id="rPlan">Plan for a night</button>
     </div></div>`;
-  $("#rGroc").onclick = () => {
-    let L = S.lists.find(l => l.name.toLowerCase() === "groceries") || S.lists[0];
-    if (!L) { L = { id: uid(), name: "Groceries", items: [] }; S.lists.push(L); }
-    (r.ingredients||[]).forEach(i => L.items.push({ id: uid(), text: i, done: false }));
-    save(); toast((r.ingredients||[]).length + " items → Groceries");
-  };
+  $("#rGroc").onclick = () => addRecipeToGroceries(r);
   $("#rStaple").onclick = () => {
-    if (!S.staples.some(s => s.name.toLowerCase() === r.title.toLowerCase())) {
-      S.staples.push({ id: uid(), name: r.title }); save(); renderRecipes(); toast("Saved as staple");
-    } else toast("Already a staple");
+    const rec = { title: r.title, servings: r.servings, ingredients: r.ingredients, steps: r.steps };
+    if (attachTargetId) {
+      const s = S.staples.find(x => x.id === attachTargetId);
+      if (s) { s.recipe = rec; toast("Recipe saved to " + s.name); }
+      attachTargetId = null;
+    } else {
+      const ex = S.staples.find(s => s.name.toLowerCase() === r.title.toLowerCase());
+      if (ex) { ex.recipe = rec; toast("Updated staple " + ex.name); }
+      else { S.staples.push({ id: uid(), name: r.title, recipe: rec }); toast("Saved as staple"); }
+    }
+    save(); renderRecipes();
   };
   $("#rPlan").onclick = () => chooseDay(d => setDinner(d, r.title));
 }
@@ -1385,7 +1506,7 @@ async function generateRecipe() {
 }
 $("#stapleAdd").addEventListener("click", () => {
   const inp = $("#stapleInput"), v = inp.value.trim(); if (!v) return;
-  S.staples.push({ id: uid(), name: v }); save(); inp.value = ""; renderRecipes();
+  S.staples.push({ id: uid(), name: v, recipe: null }); save(); inp.value = ""; renderRecipes();
 });
 $("#stapleInput").addEventListener("keydown", e => { if (e.key === "Enter") $("#stapleAdd").click(); });
 $("#recipeGo").addEventListener("click", generateRecipe);
@@ -1394,7 +1515,7 @@ attachMic($("#recipeMic"), $("#recipeInput"));
 /* ============ Render root & timers ============ */
 function render() {
   renderMast();
-  if (curView === "week") renderWeek();
+  if (curView === "week") renderCalendar();
   if (curView === "today") renderToday();
   if (curView === "chores") renderChores();
   if (curView === "lists") renderLists();
@@ -1407,7 +1528,7 @@ setInterval(() => {
   renderMastClock();
   positionNowLine();
   tickSleep();
-  if (today() !== lastDay) { lastDay = today(); weekAnchor = mondayOf(new Date()); mealAnchor = mondayOf(new Date()); render(); fetchWeather(); }
+  if (today() !== lastDay) { lastDay = today(); weekAnchor = mondayOf(new Date()); monthAnchor = firstOfMonth(new Date()); mealAnchor = mondayOf(new Date()); render(); fetchWeather(); }
 }, 30 * 1000);
 function renderMastClock() {
   const n = new Date();
@@ -1426,6 +1547,7 @@ try { if (navigator.storage && navigator.storage.persist) navigator.storage.pers
   document.title = APP_NAME + " — Family Board";
   const saved = await Store.load();
   if (saved) S = Object.assign(defaultState(), saved);
+  S.staples = (S.staples || []).map(s => ({ id: s.id || uid(), name: s.name, recipe: s.recipe || null }));
   render(); fetchWeather(); tickSleep();
 })();
 </script>
